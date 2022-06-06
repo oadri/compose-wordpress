@@ -1,0 +1,28 @@
+version: "3.0"
+services:
+  db:
+    image: mysql
+    volumes:
+      - db:/var/lib/mysql 
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: abc123.
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wp
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - wordpress:/var/www/html
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: abc123.
+      WORDPRESS_DB_NAME: wp
+volumes:
+  db:
+  wordpress:
